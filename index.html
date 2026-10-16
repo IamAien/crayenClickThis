@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Crayen! 🎁 A Special Gift For You</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Pixel Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* Pixel art typography and custom styling */
+    body {
+      font-family: 'Silkscreen', 'Press Start 2P', cursive, monospace;
+      background-color: #0b0c10;
+      color: #c5c6c7;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    .pixel-subtext {
+      font-family: 'VT323', monospace;
+    }
+
+    /* Pixel Box Container Styling */
+    .pixel-box {
+      background: #1f2833;
+      border: 4px solid #45a29e;
+      box-shadow: 
+        0 0 0 4px #0b0c10,
+        0 0 0 8px #66fcf1,
+        0 10px 20px rgba(0,0,0,0.8);
+      position: relative;
+    }
+
+    .pixel-box-gold {
+      background: #1a1625;
+      border: 4px solid #d4af37;
+      box-shadow: 
+        0 0 0 4px #0b0c10,
+        0 0 0 8px #f39c12,
+        0 10px 25px rgba(243, 156, 18, 0.35);
+    }
+
+    /* Retro Pixel Button Styles */
+    .pixel-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      background-color: #45a29e;
+      color: #0b0c10;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      box-shadow: 
+        inset -4px -4px 0px 0px #1f2833,
+        inset 4px 4px 0px 0px #66fcf1,
+        4px 4px 0px 0px #000000;
+      cursor: pointer;
+      transition: transform 0.1s, background-color 0.2s;
+    }
+
+    .pixel-btn:hover {
+      background-color: #66fcf1;
+      transform: translate(-2px, -2px);
+      box-shadow: 
+        inset -4px -4px 0px 0px #1f2833,
+        inset 4px 4px 0px 0px #ffffff,
+        6px 6px 0px 0px #000000;
+    }
+
+    .pixel-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 
+        inset -2px -2px 0px 0px #1f2833,
+        inset 2px 2px 0px 0px #ffffff,
+        2px 2px 0px 0px #000000;
+    }
+
+    .pixel-btn-gold {
+      background-color: #f39c12;
+      color: #1a1625;
+      box-shadow: 
+        inset -4px -4px 0px 0px #965d07,
+        inset 4px 4px 0px 0px #f1c40f,
+        4px 4px 0px 0px #000000;
+    }
+
+    .pixel-btn-gold:hover {
+      background-color: #f1c40f;
+      box-shadow: 
+        inset -4px -4px 0px 0px #965d07,
+        inset 4px 4px 0px 0px #ffffff,
+        6px 6px 0px 0px #000000;
+    }
+
+    /* Pixel floating animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(102, 252, 241, 0.6)); }
+      50% { filter: drop-shadow(0 0 30px rgba(243, 156, 18, 0.9)); }
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-glow {
+      animation: pulse-glow 2s infinite;
+    }
+
+    /* Canvas background layer */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Retro Scanline CRT Overlay */
+    .scanlines {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+      );
+      background-size: 100% 4px;
+      z-index: 99;
+      opacity: 0.5;
+    }
+
+    /* Mobile Phone Mockup */
+    .phone-mockup {
+      width: 220px;
+      height: 440px;
+      border: 6px solid #2c3e50;
+      border-radius: 28px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(102, 252, 241, 0.3), inset 0 0 10px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+
+    .phone-mockup:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 25px rgba(243, 156, 18, 0.6);
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 12px;
+      background: #2c3e50;
+      border-radius: 10px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center relative p-4 bg-slate-950">
+
+  <!-- Scanline Filter -->
+  <div class="scanlines"></div>
+
+  <!-- Particle Stars Background Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Top Right Audio & Controls Bar -->
+  <div class="fixed top-4 right-4 z-50 flex gap-2">
+    <button id="music-toggle-btn" class="pixel-btn text-xs !p-2 bg-slate-800 text-teal-300" title="Audio Toggle">
+      <i data-lucide="volume-x" id="music-icon" class="w-5 h-5"></i>
+    </button>
+  </div>
+
+  <!-- ==================== 1. COVER: MYSTERY CHEST / CARD OPENING ==================== -->
+  <main id="cover-screen" class="z-10 flex flex-col items-center justify-center text-center max-w-lg w-full transition-opacity duration-700">
+    
+    <div class="mb-6 animate-float">
+      <span class="text-xs tracking-widest text-teal-400 uppercase bg-teal-950/60 px-3 py-1 border border-teal-500/30 rounded">
+        ★ QUEST: BIRTHDAY SPECIAL ★
+      </span>
+    </div>
+
+    <!-- Mystery Chest Card Container -->
+    <div id="chest-card" class="pixel-box-gold p-8 my-4 cursor-pointer animate-glow transition-transform hover:scale-105 active:scale-95 group">
+      
+      <!-- Redesigned Detailed Pixel Chest SVG Graphic -->
+      <div class="w-36 h-36 mx-auto mb-4 relative flex items-center justify-center">
+        <svg id="chest-svg" class="w-32 h-32 text-yellow-400 drop-shadow-[0_0_15px_rgba(243,156,18,0.9)] transition-transform group-hover:rotate-3" viewBox="0 0 32 32" fill="none" shape-rendering="crispEdges">
+          <!-- Chest Shadow/Base -->
+          <rect x="4" y="24" width="24" height="3" fill="#111" opacity="0.6"/>
+          
+          <!-- Chest Body Background -->
+          <rect x="5" y="15" width="22" height="11" fill="#7a431d"/>
+          <!-- Wood Plank lines -->
+          <rect x="5" y="18" width="22" height="1" fill="#5c3113"/>
+          <rect x="5" y="22" width="22" height="1" fill="#5c3113"/>
+
+          <!-- Curved Chest Lid Background -->
+          <path d="M6 14C6 9 10 7 16 7C22 7 26 9 26 14H6Z" fill="#8f4f22"/>
+          <path d="M8 12C8 9.5 11 8 16 8C21 8 24 9.5 24 12H8Z" fill="#a45d2b"/>
+
+          <!-- Metal Iron Banding (Horizontal & Vertical) -->
+          <!-- Lid Metal Band -->
+          <rect x="6" y="13" width="20" height="2" fill="#3b4252"/>
+          <rect x="6" y="13" width="20" height="1" fill="#d8dee9"/>
+          
+          <!-- Body Metal Bands -->
+          <rect x="5" y="15" width="2" height="11" fill="#3b4252"/>
+          <rect x="5" y="15" width="1" height="11" fill="#d8dee9"/>
+          
+          <rect x="25" y="15" width="2" height="11" fill="#3b4252"/>
+          <rect x="25" y="15" width="1" height="11" fill="#d8dee9"/>
+
+          <rect x="5" y="24" width="22" height="2" fill="#3b4252"/>
+          <rect x="5" y="24" width="22" height="1" fill="#d8dee9"/>
+
+          <!-- Center Metal Lockplate & Keyhole -->
+          <rect x="13" y="14" width="6" height="7" fill="#ebcb8b"/>
+          <rect x="13" y="14" width="6" height="1" fill="#ffffea"/>
+          <rect x="13" y="14" width="1" height="7" fill="#b48ead"/>
+          <!-- Keyhole slot -->
+          <rect x="15" y="16" width="2" height="3" fill="#2e3440"/>
+          <circle cx="16" cy="17" r="0.8" fill="#88c0d0"/>
+
+          <!-- Rivets on Metal Straps -->
+          <rect x="6" y="19" width="1" height="1" fill="#ffffea"/>
+          <rect x="25" y="19" width="1" height="1" fill="#ffffea"/>
+          <rect x="6" y="22" width="1" height="1" fill="#ffffea"/>
+          <rect x="25" y="22" width="1" height="1" fill="#ffffea"/>
+
+          <!-- Magical Sparkling Gems on Corners / Highlights -->
+          <rect x="8" y="10" width="2" height="2" fill="#eceff4" opacity="0.8"/>
+          <rect x="22" y="10" width="2" height="2" fill="#eceff4" opacity="0.8"/>
+        </svg>
+      </div>
+
+      <h1 class="text-xl md:text-2xl font-bold text-yellow-300 tracking-wider mb-2 leading-tight">
+        SECRET GIFT
+      </h1>
+      <p class="text-xs text-teal-300 opacity-80 mb-4">A SPECIAL ITEM HAS ARRIVED!</p>
+      
+      <div class="mt-6">
+        <span class="pixel-btn pixel-btn-gold text-xs inline-flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          TAP TO UNLOCK GIFT
+        </span>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-500 mt-4 animate-pulse">
+      [ Click the chest to break the seal ]
+    </p>
+  </main>
+
+
+  <!-- ==================== 2. UNLOCKED CARD & DRAWINGS REWARDS ==================== -->
+  <section id="content-screen" class="hidden z-10 opacity-0 transition-opacity duration-1000 max-w-4xl w-full flex flex-col items-center">
+    
+    <!-- Go Back / Return Button -->
+    <div class="w-full flex justify-start mb-4">
+      <button id="go-back-btn" class="pixel-btn text-xs bg-slate-800 text-teal-300 border border-teal-500/40 flex items-center gap-2">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        GO BACK
+      </button>
+    </div>
+
+    <!-- Birthday Greeting Card Box -->
+    <div class="pixel-box p-6 md:p-8 w-full mb-8 bg-slate-900/90 backdrop-blur">
+      <div class="flex items-center justify-between border-b-2 border-teal-500/40 pb-4 mb-6">
+        <div class="flex items-center gap-3">
+          <span class="text-yellow-400 text-xl">🎉</span>
+          <h2 class="text-lg md:text-xl text-yellow-300 font-bold tracking-wide">
+            LEVEL UP! HAPPY BIRTHDAY
+          </h2>
+        </div>
+        <span class="text-xs text-teal-400 border border-teal-500/40 px-2 py-1">LVL.UP +1</span>
+      </div>
+
+      <!-- Birthday Wishes Greeting -->
+      <div class="space-y-4 text-slate-200 text-sm md:text-base leading-relaxed pixel-subtext tracking-wide">
+        <p class="text-teal-300 font-bold text-lg">Dear Crayen,</p>
+        <p>
+          Happy birthday to my best friend!!
+        </p>
+        <p>
+          Thank you for being by my side all this time. I wouldn’t have so much fun and joy without you.
+        </p>
+        <p>
+          I drew something for you, and I hope you like it.
+        </p>
+        <p>
+          Wishing you a wonderful birthday! 🎂
+        </p>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-slate-700/60 flex justify-end">
+        <span class="text-xs text-yellow-400/80 italic">— Crafted with ❤️ for Crayen 🎨</span>
+      </div>
+    </div>
+
+    <!-- Artwork Showcase Header -->
+    <div class="text-center mb-6">
+      <h3 class="text-lg text-yellow-300 flex items-center justify-center gap-2 mb-1">
+        <i data-lucide="gift" class="w-5 h-5 text-yellow-400"></i>
+        UNLOCKED REWARDS : CUSTOM ARTWORKS
+      </h3>
+      <p class="text-xs text-slate-400">Tap below to download or click to preview in full screen</p>
+    </div>
+
+    <!-- Phone Drawing Display Slots -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full justify-items-center mb-10">
+      
+      <!-- Drawing 1 Slot -->
+      <div class="pixel-box-gold p-5 flex flex-col items-center bg-slate-900/80 w-full max-w-sm">
+        <div class="text-xs text-yellow-400 font-bold mb-3 flex items-center gap-2">
+          <span>RARITY: ★★★★★</span>
+        </div>
+
+        <!-- Phone Mockup Frame 1 -->
+        <div class="phone-mockup mb-4 cursor-pointer group" onclick="openLightbox(0)">
+          <div class="phone-notch"></div>
+          <img id="preview-drawing-1" src="" alt="Drawing 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+            <span class="pixel-btn text-[10px] !py-1 !px-2 bg-yellow-400 text-black">FULL PREVIEW</span>
+          </div>
+        </div>
+
+        <h4 id="title-drawing-1" class="text-sm font-bold text-teal-300 mb-1">DRAWING #1</h4>
+        <p class="text-[10px] text-slate-400 mb-4">Custom Artwork Slot #1</p>
+
+        <button onclick="downloadDrawing(0)" class="pixel-btn pixel-btn-gold text-xs w-full flex items-center justify-center gap-2">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          DOWNLOAD DRAWING #1
+        </button>
+      </div>
+
+      <!-- Drawing 2 Slot -->
+      <div class="pixel-box-gold p-5 flex flex-col items-center bg-slate-900/80 w-full max-w-sm">
+        <div class="text-xs text-yellow-400 font-bold mb-3 flex items-center gap-2">
+          <span>RARITY: ★★★★★</span>
+        </div>
+
+        <!-- Phone Mockup Frame 2 -->
+        <div class="phone-mockup mb-4 cursor-pointer group" onclick="openLightbox(1)">
+          <div class="phone-notch"></div>
+          <img id="preview-drawing-2" src="" alt="Drawing 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+            <span class="pixel-btn text-[10px] !py-1 !px-2 bg-yellow-400 text-black">FULL PREVIEW</span>
+          </div>
+        </div>
+
+        <h4 id="title-drawing-2" class="text-sm font-bold text-teal-300 mb-1">DRAWING #2</h4>
+        <p class="text-[10px] text-slate-400 mb-4">Custom Artwork Slot #2</p>
+
+        <button onclick="downloadDrawing(1)" class="pixel-btn pixel-btn-gold text-xs w-full flex items-center justify-center gap-2">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          DOWNLOAD DRAWING #2
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== 3. MODAL: FULLSCREEN LIGHTBOX ==================== -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex-col items-center justify-center p-4 backdrop-blur-sm">
+    <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-yellow-400 p-2">
+      <i data-lucide="x" class="w-8 h-8"></i>
+    </button>
+    <div class="max-w-md w-full h-[80vh] flex flex-col items-center justify-center">
+      <img id="lightbox-img" src="" class="max-h-full max-w-full object-contain rounded-lg border-2 border-yellow-400 shadow-2xl mb-4" />
+      <p class="text-xs text-slate-300 mb-3">Long-press to save, or click button below</p>
+      <a id="lightbox-download-link" href="#" download class="pixel-btn pixel-btn-gold text-xs flex items-center gap-2">
+        <i data-lucide="download" class="w-4 h-4"></i> SAVE ARTWORK
+      </a>
+    </div>
+  </div>
+
+
+  <!-- ==================== JAVASCRIPT ENGINE ==================== -->
+  <script>
+    // =========================================================================
+    // 🎨 DRAWINGS CONFIGURATION AREA
+    // =========================================================================
+    const drawings = [
+      {
+        title: "Drawing #1",
+        url: "https://lh3.googleusercontent.com/d/1rE-sOVTY23c-FULrw_5Zpb2xrsrYskZ3",
+        fileId: "1rE-sOVTY23c-FULrw_5Zpb2xrsrYskZ3",
+        filename: "crayen_drawing_01.png"
+      },
+      {
+        title: "Drawing #2",
+        url: "https://lh3.googleusercontent.com/d/1KTZXQ1pxxYJwrMA7WEYE4V6-P-MdVCKs",
+        fileId: "1KTZXQ1pxxYJwrMA7WEYE4V6-P-MdVCKs",
+        filename: "crayen_drawing_02.png"
+      }
+    ];
+
+    // Global Audio & Particle State Declarations (Placed at the top to fix ReferenceErrors)
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let musicInterval = null;
+
+    let particles = [];
+    let canvas = null;
+    let ctx = null;
+
+    // Helper to get or create audio context safely
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Play 8-bit tone note with explicit start time option to avoid scheduling conflicts
+    function playTone(freq, duration, type = 'square', gainValue = 0.1, delay = 0) {
+      try {
+        const audioContext = getAudioContext();
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        const startTime = audioContext.currentTime + delay;
+        
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, startTime);
+        
+        gain.gain.setValueAtTime(gainValue, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+        
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      } catch(e) {
+        console.log("Audio play error", e);
+      }
+    }
+
+    // Chest open sound effect - cleanly scheduled using Web Audio API timestamps
+    function playOpenSound() {
+      const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, index) => {
+        // Schedule tones cleanly without JS timeout overlap
+        playTone(freq, 0.15, 'triangle', 0.2, index * 0.07);
+      });
+    }
+
+    // Initialize Lucide icons & Page Elements on Load
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      // Populate drawing previews
+      const img1 = document.getElementById('preview-drawing-1');
+      const img2 = document.getElementById('preview-drawing-2');
+      const title1 = document.getElementById('title-drawing-1');
+      const title2 = document.getElementById('title-drawing-2');
+
+      if (img1 && drawings[0]) img1.src = drawings[0].url;
+      if (img2 && drawings[1]) img2.src = drawings[1].url;
+      if (title1 && drawings[0]) title1.innerText = drawings[0].title;
+      if (title2 && drawings[1]) title2.innerText = drawings[1].title;
+
+      // Initialize Canvas
+      initParticles();
+    });
+
+    // Handle Drawing Download / Open Google Drive Link
+    function downloadDrawing(index) {
+      playTone(523.25, 0.1, 'sine', 0.1);
+      const artwork = drawings[index];
+      if (!artwork) return;
+
+      const fileIdMatch = artwork.url ? artwork.url.match(/\/d\/([a-zA-Z0-9_-]+)/) : null;
+      const fileId = artwork.fileId || (fileIdMatch ? fileIdMatch[1] : null);
+
+      if (fileId) {
+        const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+        window.open(downloadUrl, '_blank');
+        return;
+      }
+
+      window.open(artwork.url, '_blank');
+    }
+
+    // 8-Bit Happy Birthday song chiptune melody
+    const birthdayMelody = [
+      { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.15 }, { f: 293.66, d: 0.4 }, { f: 261.63, d: 0.4 }, { f: 349.23, d: 0.4 }, { f: 329.63, d: 0.8 },
+      { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.15 }, { f: 293.66, d: 0.4 }, { f: 261.63, d: 0.4 }, { f: 392.00, d: 0.4 }, { f: 349.23, d: 0.8 },
+      { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.15 }, { f: 523.25, d: 0.4 }, { f: 440.00, d: 0.4 }, { f: 349.23, d: 0.4 }, { f: 329.63, d: 0.4 }, { f: 293.66, d: 0.4 },
+      { f: 466.16, d: 0.3 }, { f: 466.16, d: 0.15 }, { f: 440.00, d: 0.4 }, { f: 349.23, d: 0.4 }, { f: 392.00, d: 0.4 }, { f: 349.23, d: 0.8 }
+    ];
+
+    function startBirthdayMusic() {
+      if (isMusicPlaying) return;
+      isMusicPlaying = true;
+      let noteIndex = 0;
+
+      function playNextNote() {
+        if (!isMusicPlaying) return;
+        const note = birthdayMelody[noteIndex];
+        playTone(note.f, note.d, 'square', 0.05);
+        noteIndex = (noteIndex + 1) % birthdayMelody.length;
+        musicInterval = setTimeout(playNextNote, note.d * 1000 + 50);
+      }
+
+      playNextNote();
+      updateMusicIcon();
+    }
+
+    function stopBirthdayMusic() {
+      isMusicPlaying = false;
+      if (musicInterval) clearTimeout(musicInterval);
+      updateMusicIcon();
+    }
+
+    function updateMusicIcon() {
+      const icon = document.getElementById('music-icon');
+      const btn = document.getElementById('music-toggle-btn');
+      if (!icon || !btn) return;
+
+      if (isMusicPlaying) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        btn.classList.add('bg-teal-600');
+      } else {
+        icon.setAttribute('data-lucide', 'volume-x');
+        btn.classList.remove('bg-teal-600');
+      }
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    const musicBtn = document.getElementById('music-toggle-btn');
+    if (musicBtn) {
+      musicBtn.addEventListener('click', () => {
+        if (isMusicPlaying) {
+          stopBirthdayMusic();
+        } else {
+          startBirthdayMusic();
+        }
+      });
+    }
+
+    // 🎁 CARD OPENING INTERACTION
+    const chestCard = document.getElementById('chest-card');
+    const coverScreen = document.getElementById('cover-screen');
+    const contentScreen = document.getElementById('content-screen');
+    const goBackBtn = document.getElementById('go-back-btn');
+
+    if (chestCard) {
+      chestCard.addEventListener('click', () => {
+        // 1. Resume Audio Context immediately on click
+        const ctx = getAudioContext();
+        
+        // 2. Play chest opening sound effect first
+        playOpenSound();
+        triggerExplosion();
+
+        // 3. Delay starting the background music slightly so it doesn't clash with the opening sound
+        setTimeout(() => {
+          startBirthdayMusic();
+        }, 600);
+
+        chestCard.style.transform = "scale(1.2) rotate(5deg)";
+        chestCard.style.opacity = "0";
+        
+        setTimeout(() => {
+          if (coverScreen) coverScreen.classList.add('hidden');
+          if (contentScreen) {
+            contentScreen.classList.remove('hidden');
+            setTimeout(() => {
+              contentScreen.classList.remove('opacity-0');
+              contentScreen.classList.add('opacity-100');
+            }, 50);
+          }
+        }, 600);
+      });
+    }
+
+    // Go Back Button Interaction
+    if (goBackBtn) {
+      goBackBtn.addEventListener('click', () => {
+        playTone(330, 0.1, 'square', 0.1);
+        
+        if (contentScreen) {
+          contentScreen.classList.remove('opacity-100');
+          contentScreen.classList.add('opacity-0');
+          
+          setTimeout(() => {
+            contentScreen.classList.add('hidden');
+            if (coverScreen) {
+              coverScreen.classList.remove('hidden');
+              if (chestCard) {
+                chestCard.style.transform = "scale(1)";
+                chestCard.style.opacity = "1";
+              }
+            }
+          }, 500);
+        }
+      });
+    }
+
+    // =========================================================================
+    // 🌟 PIXEL STARFIELD & BURST CANVAS ANIMATION
+    // =========================================================================
+    function initParticles() {
+      canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      particles = [];
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 3 + 1,
+          color: Math.random() > 0.5 ? '#66fcf1' : '#f39c12',
+          alpha: Math.random(),
+          speed: Math.random() * 0.02 + 0.005
+        });
+      }
+
+      animateParticles();
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function animateParticles() {
+      if (!canvas || !ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+
+        if (p.isBurst) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.alpha -= p.decay;
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
+        } else {
+          p.alpha += p.speed;
+          if (p.alpha > 1 || p.alpha < 0) p.speed = -p.speed;
+        }
+
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha));
+        ctx.fillRect(Math.floor(p.x), Math.floor(p.y), p.size, p.size);
+      }
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    function triggerExplosion() {
+      if (!canvas) canvas = document.getElementById('particle-canvas');
+      const centerX = canvas ? canvas.width / 2 : window.innerWidth / 2;
+      const centerY = canvas ? canvas.height / 2 : window.innerHeight / 2;
+
+      for (let i = 0; i < 80; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 8 + 2;
+        particles.push({
+          x: centerX,
+          y: centerY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: Math.random() * 6 + 3,
+          color: ['#f1c40f', '#f39c12', '#66fcf1', '#ffffff'][Math.floor(Math.random() * 4)],
+          alpha: 1,
+          decay: Math.random() * 0.02 + 0.015,
+          isBurst: true
+        });
+      }
+    }
+
+    // Lightbox & Modal code...
+    function openLightbox(index) {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const dlLink = document.getElementById('lightbox-download-link');
+
+      if (!drawings[index]) return;
+
+      img.src = drawings[index].url;
+      dlLink.href = drawings[index].url;
+      dlLink.download = drawings[index].filename || `drawing_${index + 1}.png`;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  </script>
+</body>
+</html>
