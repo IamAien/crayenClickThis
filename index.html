@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday Crayen! 🎁 A Special Gift For You</title>
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Pixel Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
@@ -23,6 +26,7 @@
       font-family: 'VT323', monospace;
     }
 
+    /* Pixel Box Container Styling */
     .pixel-box {
       background: #1f2833;
       border: 4px solid #45a29e;
@@ -42,6 +46,7 @@
         0 10px 25px rgba(243, 156, 18, 0.35);
     }
 
+    /* Retro Pixel Button Styles */
     .pixel-btn {
       position: relative;
       display: inline-flex;
@@ -95,6 +100,7 @@
         6px 6px 0px 0px #000000;
     }
 
+    /* Pixel floating animations */
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
@@ -113,6 +119,7 @@
       animation: pulse-glow 2s infinite;
     }
 
+    /* Canvas background layer */
     #particle-canvas {
       position: fixed;
       top: 0;
@@ -123,6 +130,7 @@
       z-index: 1;
     }
 
+    /* Retro Scanline CRT Overlay */
     .scanlines {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -136,6 +144,7 @@
       opacity: 0.5;
     }
 
+    /* Mobile Phone Mockup */
     .phone-mockup {
       width: 220px;
       height: 440px;
@@ -168,10 +177,13 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center relative p-4 bg-slate-950">
 
+  <!-- Scanline Filter -->
   <div class="scanlines"></div>
+
+  <!-- Particle Stars Background Canvas -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Top Right Audio Toggle Bar -->
+  <!-- Top Right Audio Bar -->
   <div class="fixed top-4 right-4 z-50 flex gap-2">
     <button id="music-toggle-btn" class="pixel-btn text-xs !p-2 bg-slate-800 text-teal-300" title="Audio Toggle">
       <i data-lucide="volume-x" id="music-icon" class="w-5 h-5"></i>
@@ -187,9 +199,10 @@
       </span>
     </div>
 
+    <!-- Mystery Chest Card Container -->
     <div id="chest-card" class="pixel-box-gold p-8 my-4 cursor-pointer animate-glow transition-transform hover:scale-105 active:scale-95 group">
       
-      <!-- Redesigned Detailed Pixel Chest SVG Graphic -->
+      <!-- Pixel Chest SVG Graphic -->
       <div class="w-36 h-36 mx-auto mb-4 relative flex items-center justify-center">
         <svg id="chest-svg" class="w-32 h-32 text-yellow-400 drop-shadow-[0_0_15px_rgba(243,156,18,0.9)] transition-transform group-hover:rotate-3" viewBox="0 0 32 32" fill="none" shape-rendering="crispEdges">
           <rect x="4" y="24" width="24" height="3" fill="#111" opacity="0.6"/>
@@ -242,6 +255,7 @@
   <!-- ==================== 2. UNLOCKED CARD & DRAWINGS ==================== -->
   <section id="content-screen" class="hidden z-10 opacity-0 transition-opacity duration-1000 max-w-4xl w-full flex flex-col items-center">
     
+    <!-- Go Back Button Header -->
     <div class="w-full flex justify-start mb-4">
       <button id="go-back-btn" class="pixel-btn text-xs bg-slate-800 text-teal-300 border border-teal-500/40 flex items-center gap-2">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -249,6 +263,7 @@
       </button>
     </div>
 
+    <!-- Birthday Greeting Card Box -->
     <div class="pixel-box p-6 md:p-8 w-full mb-8 bg-slate-900/90 backdrop-blur">
       <div class="flex items-center justify-between border-b-2 border-teal-500/40 pb-4 mb-6">
         <div class="flex items-center gap-3">
@@ -260,6 +275,7 @@
         <span class="text-xs text-teal-400 border border-teal-500/40 px-2 py-1">LVL.UP +1</span>
       </div>
 
+      <!-- Birthday Wishes Greeting -->
       <div class="space-y-4 text-slate-200 text-sm md:text-base leading-relaxed pixel-subtext tracking-wide">
         <p class="text-teal-300 font-bold text-lg">Dear Crayen,</p>
         <p>Happy birthday to my best friend!!</p>
@@ -273,46 +289,56 @@
       </div>
     </div>
 
+    <!-- Drawing Showcase Header -->
     <div class="text-center mb-6">
       <h3 class="text-lg text-yellow-300 flex items-center justify-center gap-2 mb-1">
         <i data-lucide="gift" class="w-5 h-5 text-yellow-400"></i>
-        UNLOCKED REWARDS : CUSTOM ARTWORKS
+        UNLOCKED REWARDS : MY DRAWINGS
       </h3>
       <p class="text-xs text-slate-400">Tap below to download or click to preview in full screen</p>
     </div>
 
+    <!-- Phone Drawing Display Slots -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full justify-items-center mb-10">
       
-      <!-- Drawing 1 -->
+      <!-- Drawing 1 Slot -->
       <div class="pixel-box-gold p-5 flex flex-col items-center bg-slate-900/80 w-full max-w-sm">
         <div class="text-xs text-yellow-400 font-bold mb-3">RARITY: ★★★★★</div>
+
+        <!-- Phone Mockup Frame 1 -->
         <div class="phone-mockup mb-4 cursor-pointer group" onclick="openLightbox(0)">
           <div class="phone-notch"></div>
-          <img id="preview-drawing-1" src="" alt="Day Artwork" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <img id="preview-drawing-1" src="" alt="Day Drawing" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
             <span class="pixel-btn text-[10px] !py-1 !px-2 bg-yellow-400 text-black">FULL PREVIEW</span>
           </div>
         </div>
-        <h4 id="title-drawing-1" class="text-sm font-bold text-teal-300 mb-1">DAY ARTWORK</h4>
-        <p class="text-[10px] text-slate-400 mb-4">Custom Artwork #1</p>
+
+        <h4 id="title-drawing-1" class="text-sm font-bold text-teal-300 mb-1">DAY DRAWING</h4>
+        <p class="text-[10px] text-slate-400 mb-4">Drawing #1</p>
+
         <button onclick="downloadDrawing(0)" class="pixel-btn pixel-btn-gold text-xs w-full flex items-center justify-center gap-2">
           <i data-lucide="download" class="w-4 h-4"></i>
           DOWNLOAD DAY.PNG
         </button>
       </div>
 
-      <!-- Drawing 2 -->
+      <!-- Drawing 2 Slot -->
       <div class="pixel-box-gold p-5 flex flex-col items-center bg-slate-900/80 w-full max-w-sm">
         <div class="text-xs text-yellow-400 font-bold mb-3">RARITY: ★★★★★</div>
+
+        <!-- Phone Mockup Frame 2 -->
         <div class="phone-mockup mb-4 cursor-pointer group" onclick="openLightbox(1)">
           <div class="phone-notch"></div>
-          <img id="preview-drawing-2" src="" alt="Night Artwork" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <img id="preview-drawing-2" src="" alt="Night Drawing" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
             <span class="pixel-btn text-[10px] !py-1 !px-2 bg-yellow-400 text-black">FULL PREVIEW</span>
           </div>
         </div>
-        <h4 id="title-drawing-2" class="text-sm font-bold text-teal-300 mb-1">NIGHT ARTWORK</h4>
-        <p class="text-[10px] text-slate-400 mb-4">Custom Artwork #2</p>
+
+        <h4 id="title-drawing-2" class="text-sm font-bold text-teal-300 mb-1">NIGHT DRAWING</h4>
+        <p class="text-[10px] text-slate-400 mb-4">Drawing #2</p>
+
         <button onclick="downloadDrawing(1)" class="pixel-btn pixel-btn-gold text-xs w-full flex items-center justify-center gap-2">
           <i data-lucide="download" class="w-4 h-4"></i>
           DOWNLOAD NIGHT.PNG
@@ -320,10 +346,14 @@
       </div>
 
     </div>
+
+    <div class="text-center text-xs text-slate-500 pb-8">
+      <p>💡 Tip: You can also long-press the image on mobile devices to save directly to your photos!</p>
+    </div>
   </section>
 
 
-  <!-- ==================== 3. LIGHTBOX MODAL ==================== -->
+  <!-- ==================== 3. MODAL: FULLSCREEN LIGHTBOX ==================== -->
   <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex-col items-center justify-center p-4 backdrop-blur-sm">
     <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-yellow-400 p-2">
       <i data-lucide="x" class="w-8 h-8"></i>
@@ -331,7 +361,7 @@
     <div class="max-w-md w-full h-[80vh] flex flex-col items-center justify-center">
       <img id="lightbox-img" src="" class="max-h-full max-w-full object-contain rounded-lg border-2 border-yellow-400 shadow-2xl mb-4" />
       <button id="lightbox-download-btn" class="pixel-btn pixel-btn-gold text-xs flex items-center gap-2">
-        <i data-lucide="download" class="w-4 h-4"></i> SAVE ARTWORK
+        <i data-lucide="download" class="w-4 h-4"></i> SAVE DRAWING
       </button>
     </div>
   </div>
@@ -339,14 +369,18 @@
 
   <!-- ==================== JAVASCRIPT ENGINE ==================== -->
   <script>
+    // =========================================================================
+    // 🎨 DRAWINGS CONFIGURATION
+    // Replace YOUR_GITHUB_USERNAME and YOUR_REPOSITORY_NAME with your actual info.
+    // =========================================================================
     const drawings = [
       {
-        title: "DAY ARTWORK",
+        title: "DAY DRAWING",
         url: "https://raw.githubusercontent.com/IamAien/crayenClickThis/main/assets/Day.png",
         filename: "Day.png"
       },
       {
-        title: "NIGHT ARTWORK",
+        title: "NIGHT DRAWING",
         url: "https://raw.githubusercontent.com/IamAien/crayenClickThis/main/assets/Night.png",
         filename: "Night.png"
       }
@@ -412,30 +446,31 @@
       initParticles();
     });
 
+    // Forced Blob Download Function for GitHub Hosted Images
     async function downloadDrawing(index) {
       playTone(523.25, 0.1, 'sine', 0.1);
-      const artwork = drawings[index];
-      if (!artwork) return;
+      const drawing = drawings[index];
+      if (!drawing) return;
 
       try {
-        const response = await fetch(artwork.url);
+        const response = await fetch(drawing.url);
         const blob = await response.blob();
         const blobUrl = window.URL.createObjectURL(blob);
         
         const a = document.createElement('a');
         a.style.display = 'none';
         a.href = blobUrl;
-        a.download = artwork.filename;
+        a.download = drawing.filename;
         document.body.appendChild(a);
         a.click();
         
         window.URL.revokeObjectURL(blobUrl);
         document.body.removeChild(a);
       } catch (e) {
-        // Fallback if fetch is restricted by browser CORS
+        // Fallback if CORS prevents fetch
         const a = document.createElement('a');
-        a.href = artwork.url;
-        a.download = artwork.filename;
+        a.href = drawing.url;
+        a.download = drawing.filename;
         a.target = '_blank';
         document.body.appendChild(a);
         a.click();
@@ -443,6 +478,7 @@
       }
     }
 
+    // 8-Bit Happy Birthday melody
     const birthdayMelody = [
       { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.15 }, { f: 293.66, d: 0.4 }, { f: 261.63, d: 0.4 }, { f: 349.23, d: 0.4 }, { f: 329.63, d: 0.8 },
       { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.15 }, { f: 293.66, d: 0.4 }, { f: 261.63, d: 0.4 }, { f: 392.00, d: 0.4 }, { f: 349.23, d: 0.8 },
@@ -501,6 +537,7 @@
       });
     }
 
+    // Interaction triggers
     const chestCard = document.getElementById('chest-card');
     const coverScreen = document.getElementById('cover-screen');
     const contentScreen = document.getElementById('content-screen');
