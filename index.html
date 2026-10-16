@@ -14,7 +14,6 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
-    /* Pixel art typography and custom styling */
     body {
       font-family: 'Silkscreen', 'Press Start 2P', cursive, monospace;
       background-color: #0b0c10;
@@ -178,10 +177,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center relative p-4 bg-slate-950">
 
-  <!-- Scanline Filter -->
   <div class="scanlines"></div>
-
-  <!-- Particle Stars Background Canvas -->
   <canvas id="particle-canvas"></canvas>
 
   <!-- Top Right Audio & Controls Bar -->
@@ -220,11 +216,9 @@
           <path d="M8 12C8 9.5 11 8 16 8C21 8 24 9.5 24 12H8Z" fill="#a45d2b"/>
 
           <!-- Metal Iron Banding (Horizontal & Vertical) -->
-          <!-- Lid Metal Band -->
           <rect x="6" y="13" width="20" height="2" fill="#3b4252"/>
           <rect x="6" y="13" width="20" height="1" fill="#d8dee9"/>
           
-          <!-- Body Metal Bands -->
           <rect x="5" y="15" width="2" height="11" fill="#3b4252"/>
           <rect x="5" y="15" width="1" height="11" fill="#d8dee9"/>
           
@@ -238,17 +232,16 @@
           <rect x="13" y="14" width="6" height="7" fill="#ebcb8b"/>
           <rect x="13" y="14" width="6" height="1" fill="#ffffea"/>
           <rect x="13" y="14" width="1" height="7" fill="#b48ead"/>
-          <!-- Keyhole slot -->
           <rect x="15" y="16" width="2" height="3" fill="#2e3440"/>
           <circle cx="16" cy="17" r="0.8" fill="#88c0d0"/>
 
-          <!-- Rivets on Metal Straps -->
+          <!-- Rivets -->
           <rect x="6" y="19" width="1" height="1" fill="#ffffea"/>
           <rect x="25" y="19" width="1" height="1" fill="#ffffea"/>
           <rect x="6" y="22" width="1" height="1" fill="#ffffea"/>
           <rect x="25" y="22" width="1" height="1" fill="#ffffea"/>
 
-          <!-- Magical Sparkling Gems on Corners / Highlights -->
+          <!-- Highlights -->
           <rect x="8" y="10" width="2" height="2" fill="#eceff4" opacity="0.8"/>
           <rect x="22" y="10" width="2" height="2" fill="#eceff4" opacity="0.8"/>
         </svg>
@@ -336,7 +329,6 @@
           <span>RARITY: ★★★★★</span>
         </div>
 
-        <!-- Phone Mockup Frame 1 -->
         <div class="phone-mockup mb-4 cursor-pointer group" onclick="openLightbox(0)">
           <div class="phone-notch"></div>
           <img id="preview-drawing-1" src="" alt="Drawing 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -360,7 +352,6 @@
           <span>RARITY: ★★★★★</span>
         </div>
 
-        <!-- Phone Mockup Frame 2 -->
         <div class="phone-mockup mb-4 cursor-pointer group" onclick="openLightbox(1)">
           <div class="phone-notch"></div>
           <img id="preview-drawing-2" src="" alt="Drawing 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -399,34 +390,27 @@
 
   <!-- ==================== JAVASCRIPT ENGINE ==================== -->
   <script>
-    // =========================================================================
-    // 🎨 DRAWINGS CONFIGURATION AREA
-    // =========================================================================
     const drawings = [
       {
-        title: "Drawing #1",
-        url: "https://lh3.googleusercontent.com/d/1rE-sOVTY23c-FULrw_5Zpb2xrsrYskZ3",
-        fileId: "1rE-sOVTY23c-FULrw_5Zpb2xrsrYskZ3",
-        filename: "crayen_drawing_01.png"
+        title: "Day Artwork",
+        url: "https://raw.githubusercontent.com/iamAien/crayenClickThis/main/assets/Day",
+        filename: "Day.png"
       },
       {
-        title: "Drawing #2",
-        url: "https://lh3.googleusercontent.com/d/1KTZXQ1pxxYJwrMA7WEYE4V6-P-MdVCKs",
-        fileId: "1KTZXQ1pxxYJwrMA7WEYE4V6-P-MdVCKs",
-        filename: "crayen_drawing_02.png"
+        title: "Night Artwork",
+        url: "https://raw.githubusercontent.com/iamAien/crayenClickThis/main/assets/Night",
+        filename: "Night.png"
       }
     ];
 
-    // Global Audio & Particle State Declarations (Placed at the top to fix ReferenceErrors)
     let audioCtx = null;
     let isMusicPlaying = false;
     let musicInterval = null;
-
     let particles = [];
     let canvas = null;
     let ctx = null;
 
-    // Helper to get or create audio context safely
+    // Helper to get audio context
     function getAudioContext() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -437,7 +421,7 @@
       return audioCtx;
     }
 
-    // Play 8-bit tone note with explicit start time option to avoid scheduling conflicts
+    // Play 8-bit tone note
     function playTone(freq, duration, type = 'square', gainValue = 0.1, delay = 0) {
       try {
         const audioContext = getAudioContext();
@@ -462,22 +446,20 @@
       }
     }
 
-    // Chest open sound effect - cleanly scheduled using Web Audio API timestamps
+    // Chest open sound effect
     function playOpenSound() {
       const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
       notes.forEach((freq, index) => {
-        // Schedule tones cleanly without JS timeout overlap
         playTone(freq, 0.15, 'triangle', 0.2, index * 0.07);
       });
     }
 
-    // Initialize Lucide icons & Page Elements on Load
+    // Initialize Page
     document.addEventListener("DOMContentLoaded", () => {
       if (window.lucide) {
         lucide.createIcons();
       }
 
-      // Populate drawing previews
       const img1 = document.getElementById('preview-drawing-1');
       const img2 = document.getElementById('preview-drawing-2');
       const title1 = document.getElementById('title-drawing-1');
@@ -488,29 +470,25 @@
       if (title1 && drawings[0]) title1.innerText = drawings[0].title;
       if (title2 && drawings[1]) title2.innerText = drawings[1].title;
 
-      // Initialize Canvas
       initParticles();
     });
 
-    // Handle Drawing Download / Open Google Drive Link
+    // Handle Drawing Downloads
     function downloadDrawing(index) {
       playTone(523.25, 0.1, 'sine', 0.1);
       const artwork = drawings[index];
       if (!artwork) return;
 
-      const fileIdMatch = artwork.url ? artwork.url.match(/\/d\/([a-zA-Z0-9_-]+)/) : null;
-      const fileId = artwork.fileId || (fileIdMatch ? fileIdMatch[1] : null);
-
-      if (fileId) {
-        const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-        window.open(downloadUrl, '_blank');
-        return;
-      }
-
-      window.open(artwork.url, '_blank');
+      const a = document.createElement('a');
+      a.href = artwork.url;
+      a.download = artwork.filename || `drawing_${index + 1}.png`;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
 
-    // 8-Bit Happy Birthday song chiptune melody
+    // 8-Bit Happy Birthday Melody
     const birthdayMelody = [
       { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.15 }, { f: 293.66, d: 0.4 }, { f: 261.63, d: 0.4 }, { f: 349.23, d: 0.4 }, { f: 329.63, d: 0.8 },
       { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.15 }, { f: 293.66, d: 0.4 }, { f: 261.63, d: 0.4 }, { f: 392.00, d: 0.4 }, { f: 349.23, d: 0.8 },
@@ -569,7 +547,7 @@
       });
     }
 
-    // 🎁 CARD OPENING INTERACTION
+    // Card Opening Interactions
     const chestCard = document.getElementById('chest-card');
     const coverScreen = document.getElementById('cover-screen');
     const contentScreen = document.getElementById('content-screen');
@@ -577,14 +555,10 @@
 
     if (chestCard) {
       chestCard.addEventListener('click', () => {
-        // 1. Resume Audio Context immediately on click
-        const ctx = getAudioContext();
-        
-        // 2. Play chest opening sound effect first
+        getAudioContext();
         playOpenSound();
         triggerExplosion();
 
-        // 3. Delay starting the background music slightly so it doesn't clash with the opening sound
         setTimeout(() => {
           startBirthdayMusic();
         }, 600);
@@ -605,7 +579,6 @@
       });
     }
 
-    // Go Back Button Interaction
     if (goBackBtn) {
       goBackBtn.addEventListener('click', () => {
         playTone(330, 0.1, 'square', 0.1);
@@ -628,9 +601,7 @@
       });
     }
 
-    // =========================================================================
-    // 🌟 PIXEL STARFIELD & BURST CANVAS ANIMATION
-    // =========================================================================
+    // Pixel Starfield Animation
     function initParticles() {
       canvas = document.getElementById('particle-canvas');
       if (!canvas) return;
@@ -709,7 +680,7 @@
       }
     }
 
-    // Lightbox & Modal code...
+    // Lightbox Functions
     function openLightbox(index) {
       const modal = document.getElementById('lightbox-modal');
       const img = document.getElementById('lightbox-img');
